@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4926CFBC4B004F8EAC /* TabBarController.swift */; };
+		97738D4D26CFBDAD004F8EAC /* CollectonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */; };
+		97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */; };
 		979E332E26CF6E7900A89FFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E332D26CF6E7900A89FFB /* AppDelegate.swift */; };
 		979E333026CF6E7900A89FFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E332F26CF6E7900A89FFB /* SceneDelegate.swift */; };
 		979E333726CF6E7E00A89FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979E333626CF6E7E00A89FFB /* Assets.xcassets */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97738D4926CFBC4B004F8EAC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectonViewController.swift; sourceTree = "<group>"; };
+		97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		979E332A26CF6E7900A89FFB /* City.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = City.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979E332D26CF6E7900A89FFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		979E332F26CF6E7900A89FFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +54,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97738D4226CFBB81004F8EAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				979E334926CF706B00A89FFB /* City.swift */,
+				97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		97738D4326CFBB9A004F8EAC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				97738D4526CFBBB6004F8EAC /* DetailViewController */,
+				97738D4426CFBBAC004F8EAC /* MainViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		97738D4426CFBBAC004F8EAC /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				979E334726CF706A00A89FFB /* TableViewCell.swift */,
+				979E334826CF706A00A89FFB /* MainViewController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		97738D4526CFBBB6004F8EAC /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				979E334A26CF706B00A89FFB /* DetailViewController.swift */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		97738D4626CFBBE7004F8EAC /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				979E335126CF716200A89FFB /* Coordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		97738D4726CFBBF9004F8EAC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				979E334B26CF706B00A89FFB /* UIView+Sugar.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		97738D4826CFBC23004F8EAC /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				97738D4926CFBC4B004F8EAC /* TabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		97738D4B26CFBD88004F8EAC /* CollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */,
+			);
+			path = CollectionViewController;
+			sourceTree = "<group>";
+		};
 		979E332126CF6E7900A89FFB = {
 			isa = PBXGroup;
 			children = (
@@ -68,12 +141,12 @@
 		979E332C26CF6E7900A89FFB /* City */ = {
 			isa = PBXGroup;
 			children = (
-				979E335126CF716200A89FFB /* Coordinator.swift */,
-				979E334926CF706B00A89FFB /* City.swift */,
-				979E334A26CF706B00A89FFB /* DetailViewController.swift */,
-				979E334826CF706A00A89FFB /* MainViewController.swift */,
-				979E334726CF706A00A89FFB /* TableViewCell.swift */,
-				979E334B26CF706B00A89FFB /* UIView+Sugar.swift */,
+				97738D4B26CFBD88004F8EAC /* CollectionViewController */,
+				97738D4826CFBC23004F8EAC /* TabBarController */,
+				97738D4726CFBBF9004F8EAC /* Extensions */,
+				97738D4626CFBBE7004F8EAC /* Coordinators */,
+				97738D4326CFBB9A004F8EAC /* ViewControllers */,
+				97738D4226CFBB81004F8EAC /* Models */,
 				979E332D26CF6E7900A89FFB /* AppDelegate.swift */,
 				979E332F26CF6E7900A89FFB /* SceneDelegate.swift */,
 				979E333626CF6E7E00A89FFB /* Assets.xcassets */,
@@ -204,6 +277,9 @@
 				979E335226CF716200A89FFB /* Coordinator.swift in Sources */,
 				979E334C26CF706B00A89FFB /* TableViewCell.swift in Sources */,
 				979E334E26CF706B00A89FFB /* City.swift in Sources */,
+				97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */,
+				97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */,
+				97738D4D26CFBDAD004F8EAC /* CollectonViewController.swift in Sources */,
 				979E335026CF706B00A89FFB /* UIView+Sugar.swift in Sources */,
 				979E332E26CF6E7900A89FFB /* AppDelegate.swift in Sources */,
 				979E333026CF6E7900A89FFB /* SceneDelegate.swift in Sources */,
