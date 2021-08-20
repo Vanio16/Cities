@@ -27,8 +27,8 @@ final class Coordinator: MainViewControllerOutput, DetailViewControllerOutput {
         window.makeKeyAndVisible()
     }
 
-    func showDetailScreen(_ image: UIImage, _ name: String) {
-        detailViewController.commonInit(image, title: name)
+    func showDetailScreen(_ city: City) {
+        detailViewController.refreshContent(city)
         navigationController.pushViewController(detailViewController, animated: true)
     }
 

@@ -1,6 +1,6 @@
 //
 //  TableViewCell.swift
-//  TableViewApp
+//  City
 //
 //  Created by Ivan Zakharov on 17/12/20.
 //
@@ -38,14 +38,9 @@ class TableViewCell: UITableViewCell {
 
         titleLabel.configureFrame { maker in
             maker.centerY()
-                // .right(inset: Constants.textInsetRight)
                 .left(to: cityImage.nui_right, inset: Constants.textInsetLeft)
                 .sizeToFit()
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
     func commonInit(_ imageName: UIImage, title: String) {

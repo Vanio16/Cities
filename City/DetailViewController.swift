@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  Cities
+//  City
 //
 //  Created by Ivan Zakharov on 19/8/21.
 //
@@ -21,7 +21,11 @@ class DetailViewController: UIViewController {
     }
 
     var output: DetailViewControllerOutput?
-    private let nameLabel: UILabel = .init()
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
     private let pictureImageView: UIImageView = .init()
     private let backButton: UIButton = {
         let button = UIButton()
@@ -36,7 +40,6 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .white
         view.add(nameLabel, backButton, pictureImageView)
         navigationController?.navigationBar.isHidden = true
-        nameLabel.textAlignment = .center
     }
 
     override func viewDidLayoutSubviews() {
@@ -65,9 +68,9 @@ class DetailViewController: UIViewController {
         }
     }
 
-    func commonInit(_ image: UIImage, title: String) {
-        pictureImageView.image = image
-        nameLabel.text = title
+    func refreshContent(_ city: City) {
+        pictureImageView.image = city.picture
+        nameLabel.text = city.name
     }
 
     @objc private func closeScreenButton() {

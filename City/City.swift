@@ -1,6 +1,6 @@
 //
 //  City.swift
-//  TableViewApp
+//  City
 //
 //  Created by Ivan Zakharov on 14/12/20.
 //
