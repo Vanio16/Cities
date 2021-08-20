@@ -13,7 +13,7 @@ protocol MainViewControllerOutput {
 }
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     private let tableView: UITableView = .init()
     var output: MainViewControllerOutput?
     var selectCity: City?
@@ -35,7 +35,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                   City(name: "Novosibirsk", picture: "novosib"),
                   City(name: "Samara", picture: "samara"),
                   City(name: "Irkutsk", picture: "irkutsk")]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,7 +44,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.configureFrame { maker in
@@ -54,32 +54,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 .right()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.commonInit(cities[indexPath.row].picture, title: cities[indexPath.row].name)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectCity = cities[indexPath.row]
         output?.showDetailScreen(cities[indexPath.item].picture, cities[indexPath.item].name)
         self.tableView.deselectRow(at: indexPath, animated: true)
         print(indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectCity = cities[indexPath.row]
         return indexPath
     }
 }
-
-

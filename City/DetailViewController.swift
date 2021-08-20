@@ -14,12 +14,12 @@ protocol DetailViewControllerOutput {
 }
 
 class DetailViewController: UIViewController {
-    
+
     private struct Constants {
         static let nameLabelInsetTop: CGFloat = 20
-        static let backButtonInsetTop:CGFloat = 20
+        static let backButtonInsetTop: CGFloat = 20
     }
-    
+
     var output: DetailViewControllerOutput?
     private let nameLabel: UILabel = .init()
     private let pictureImageView: UIImageView = .init()
@@ -30,7 +30,7 @@ class DetailViewController: UIViewController {
         button.addTarget(self, action: #selector(closeScreenButton), for: .touchUpInside)
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -38,38 +38,38 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         nameLabel.textAlignment = .center
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         pictureImageView.configureFrame { maker in
             maker.top(to: view.nui_safeArea.top)
                 .left(to: view.nui_safeArea.left)
                 .right(to: view.nui_safeArea.right)
                 .bottom(to: view.nui_centerY)
         }
-        
+
         nameLabel.configureFrame { maker in
             maker.centerX()
                 .top(to: pictureImageView.nui_bottom, inset: Constants.nameLabelInsetTop)
                 .left(to: view.nui_safeArea.left)
                 .right(to: view.nui_safeArea.right)
                 .heightToFit()
-            
+
         }
-        
+
         backButton.configureFrame { maker in
             maker.sizeToFit()
                 .centerX()
                 .top(to: nameLabel.nui_bottom, inset: Constants.backButtonInsetTop)
         }
     }
-    
+
     func commonInit(_ image: UIImage, title: String) {
         pictureImageView.image = image
         nameLabel.text = title
     }
-    
+
     @objc private func closeScreenButton() {
         output?.showMainScreen()
     }

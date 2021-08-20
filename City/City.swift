@@ -11,7 +11,7 @@ import UIKit
 class City {
     var name: String
     var picture: UIImage
-    
+
     init(name: String, picture: String) {
         self.name = name
         self.picture = UIImage(named: picture)!
