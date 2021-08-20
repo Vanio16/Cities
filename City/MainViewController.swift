@@ -14,13 +14,6 @@ protocol MainViewControllerOutput {
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cellHight: CGFloat = 110
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.dataSource = self
-        table.delegate = self
-        table.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
-        return table
-    }()
     var output: MainViewControllerOutput?
     var cities = [City(name: "Omsk", picture: "omsk"),
                   City(name: "Moscow", picture: "moscow"),
@@ -40,6 +33,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                   City(name: "Novosibirsk", picture: "novosib"),
                   City(name: "Samara", picture: "samara"),
                   City(name: "Irkutsk", picture: "irkutsk")]
+    private lazy var tableView: UITableView = {
+        let table = UITableView()
+        table.dataSource = self
+        table.delegate = self
+        table.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
+        return table
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableViewCell
-        cell?.commonInit(cities[indexPath.row].picture, title: cities[indexPath.row].name)
+        cell?.refreshContent(cities[indexPath.row])
         return cell ?? TableViewCell()
     }
 
@@ -73,6 +73,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         output?.showDetailScreen(cities[indexPath.item])
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

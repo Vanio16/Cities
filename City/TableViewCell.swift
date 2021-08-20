@@ -43,8 +43,8 @@ class TableViewCell: UITableViewCell {
         }
     }
 
-    func commonInit(_ imageName: UIImage, title: String) {
-        cityImage.image = imageName
-        titleLabel.text = title
+    func refreshContent(_ city: City) {
+        cityImage.image = city.picture
+        titleLabel.text = city.name
     }
 }

@@ -53,12 +53,10 @@ class DetailViewController: UIViewController {
         }
 
         nameLabel.configureFrame { maker in
-            maker.centerX()
-                .top(to: pictureImageView.nui_bottom, inset: Constants.nameLabelInsetTop)
+            maker.top(to: pictureImageView.nui_bottom, inset: Constants.nameLabelInsetTop)
                 .left(to: view.nui_safeArea.left)
                 .right(to: view.nui_safeArea.right)
                 .heightToFit()
-
         }
 
         backButton.configureFrame { maker in
