@@ -11,13 +11,24 @@ import UIKit
 final class Coordinator: MainViewControllerOutput, DetailViewControllerOutput {
 
     let window: UIWindow
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
+    let tabBarController = TabBarController()
     let mainViewController = MainViewController()
     let detailViewController = DetailViewController()
+    let collectionViewController = CollectionViewController()
+
+    let images = ["rectangle.grid.1x2.fill", "square.grid.2x2.fill"]
+    let titles = ["Таблица", "Коллекция"]
 
     init(window: UIWindow) {
         self.window = window
-        navigationController = .init(rootViewController: mainViewController)
+        tabBarController.setViewControllers([mainViewController, collectionViewController], animated: true)
+        let items = tabBarController.tabBar.items
+        for item in 0..<images.count {
+            items?[item].image = UIImage(systemName: images[item])
+            items?[item].title = titles[item]
+        }
+        navigationController = .init(rootViewController: tabBarController)
     }
 
     func start() {
