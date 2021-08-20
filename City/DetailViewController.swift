@@ -14,10 +14,12 @@ protocol DetailViewControllerOutput {
 }
 
 class DetailViewController: UIViewController {
+    
     private struct Constants {
         static let nameLabelInsetTop: CGFloat = 20
         static let backButtonInsetTop:CGFloat = 20
     }
+    
     var output: DetailViewControllerOutput?
     private let nameLabel: UILabel = .init()
     private let pictureImageView: UIImageView = .init()
@@ -26,7 +28,7 @@ class DetailViewController: UIViewController {
         button.setTitle("Назад", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(closeScreenButton), for: .touchUpInside)
-    return button
+        return button
     }()
     
     override func viewDidLoad() {
@@ -39,13 +41,14 @@ class DetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         pictureImageView.configureFrame { maker in
             maker.top(to: view.nui_safeArea.top)
                 .left(to: view.nui_safeArea.left)
                 .right(to: view.nui_safeArea.right)
                 .bottom(to: view.nui_centerY)
         }
+        
         nameLabel.configureFrame { maker in
             maker.centerX()
                 .top(to: pictureImageView.nui_bottom, inset: Constants.nameLabelInsetTop)
@@ -54,6 +57,7 @@ class DetailViewController: UIViewController {
                 .heightToFit()
             
         }
+        
         backButton.configureFrame { maker in
             maker.sizeToFit()
                 .centerX()
@@ -67,8 +71,6 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func closeScreenButton() {
-//        dismiss(animated: true, completion: nil)
-       // navigationController?.popViewController(animated: true)
         output?.showMainScreen()
     }
 }

@@ -62,8 +62,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.commonInit(cities[indexPath.row].picture, title: cities[indexPath.row].name)
-        //        cell.titleLabel?.text = cities[indexPath.row].name
-        //        cell.cityImage?.image = cities[indexPath.row].picture
         return cell
     }
     
@@ -73,13 +71,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectCity = cities[indexPath.row]
-        //        self.modalPresentationStyle = .fullScreen
-        //        self.present(secondViewController, animated: true, completion: nil)
-        //self.navigationController?.pushViewController(detailViewController, animated: true)
         output?.showDetailScreen(cities[indexPath.item].picture, cities[indexPath.item].name)
         self.tableView.deselectRow(at: indexPath, animated: true)
         print(indexPath)
     }
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectCity = cities[indexPath.row]
         return indexPath

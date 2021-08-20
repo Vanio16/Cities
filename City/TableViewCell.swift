@@ -9,12 +9,14 @@ import UIKit
 import Framezilla
 
 class TableViewCell: UITableViewCell {
+    
     private struct Constants {
         static let imageSize: CGSize = .init(width: 100, height: 100)
         static let imageInsetLeft: CGFloat = 10
         static let textInsetRight: CGFloat = 10
         static let textInsetLeft: CGFloat = 10
     }
+    
     private let titleLabel: UILabel = .init()
     private let cityImage: UIImageView = .init()
     
@@ -22,30 +24,30 @@ class TableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         add(titleLabel, cityImage)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func layoutSubviews() {
         cityImage.configureFrame { maker in
             maker.centerY()
                 .size(Constants.imageSize)
                 .left(inset: Constants.imageInsetLeft)
         }
-
+        
         titleLabel.configureFrame { maker in
             maker.centerY()
                 //.right(inset: Constants.textInsetRight)
                 .left(to: cityImage.nui_right, inset: Constants.textInsetLeft)
                 .sizeToFit()
         }
-
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
     func commonInit(_ imageName: UIImage, title: String) {
         cityImage.image = imageName
         titleLabel.text = title

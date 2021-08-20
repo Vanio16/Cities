@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class Coordinator: MainViewControllerOutput, DetailViewControllerOutput {
-
+    
     let window: UIWindow
     let navigationController: UINavigationController
     let mainViewController = MainViewController()
