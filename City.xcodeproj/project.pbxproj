@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4926CFBC4B004F8EAC /* TabBarController.swift */; };
 		97738D4D26CFBDAD004F8EAC /* CollectonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */; };
+		97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */; };
 		979E332E26CF6E7900A89FFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E332D26CF6E7900A89FFB /* AppDelegate.swift */; };
 		979E333026CF6E7900A89FFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E332F26CF6E7900A89FFB /* SceneDelegate.swift */; };
 		979E333726CF6E7E00A89FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979E333626CF6E7E00A89FFB /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		97738D4926CFBC4B004F8EAC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectonViewController.swift; sourceTree = "<group>"; };
+		97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		979E332A26CF6E7900A89FFB /* City.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = City.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979E332D26CF6E7900A89FFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		979E332F26CF6E7900A89FFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				979E334926CF706B00A89FFB /* City.swift */,
+				97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				979E334C26CF706B00A89FFB /* TableViewCell.swift in Sources */,
 				979E334E26CF706B00A89FFB /* City.swift in Sources */,
 				97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */,
+				97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */,
 				97738D4D26CFBDAD004F8EAC /* CollectonViewController.swift in Sources */,
 				979E335026CF706B00A89FFB /* UIView+Sugar.swift in Sources */,
 				979E332E26CF6E7900A89FFB /* AppDelegate.swift in Sources */,
