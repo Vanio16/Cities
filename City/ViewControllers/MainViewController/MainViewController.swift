@@ -15,24 +15,7 @@ protocol MainViewControllerOutput {
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cellHight: CGFloat = 110
     var output: MainViewControllerOutput?
-    var cities = [City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk"),
-                  City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk"),
-                  City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk")]
+    var citiesService: CitiesService = CitiesService.shared
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.dataSource = self
@@ -58,12 +41,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return citiesService.getCity().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableViewCell
-        cell?.refreshContent(cities[indexPath.row])
+        cell?.refreshContent(citiesService.getCity()[indexPath.row])
         return cell ?? TableViewCell()
     }
 
@@ -72,7 +55,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output?.showDetailScreen(cities[indexPath.item])
+        output?.showDetailScreen(citiesService.getCity()[indexPath.item])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

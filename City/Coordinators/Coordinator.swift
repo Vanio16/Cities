@@ -33,6 +33,7 @@ final class Coordinator: MainViewControllerOutput, DetailViewControllerOutput {
     func start() {
         mainViewController.output = self
         detailViewController.output = self
+        collectionViewController.output = self
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
