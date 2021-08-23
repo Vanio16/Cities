@@ -12,11 +12,7 @@ import Framezilla
 class CollectionViewCell: UICollectionViewCell {
     private struct Constants {
         static let imageSize: CGSize = .init(width: 100, height: 100)
-        static let imageInsetLeft: CGFloat = 4
-        static let imageInsetRight: CGFloat = 4
-        static let imageInsetTop: CGFloat = 4
-        static let imageInsetBot: CGFloat = 4
-        static let textInsetTop: CGFloat = 4
+        static let imageInsets: UIEdgeInsets = .init(top: 4, left: 4, bottom: 4, right: 4)
     }
 
     private let cityImage: UIImageView = .init()
@@ -33,10 +29,7 @@ class CollectionViewCell: UICollectionViewCell {
         cityImage.configureFrame { maker in
             maker.centerY()
                 .centerX()
-                .left(inset: Constants.imageInsetLeft)
-                .right(inset: Constants.imageInsetRight)
-                .top(inset: Constants.imageInsetTop)
-                .bottom(inset: Constants.imageInsetBot)
+                .edges(insets: Constants.imageInsets)
         }
     }
 

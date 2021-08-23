@@ -15,19 +15,18 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     var output: MainViewControllerOutput?
     var citiesService: CitiesService = CitiesService.shared
-    private let layout: UICollectionViewFlowLayout = {
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         return layout
     }()
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
         view.backgroundColor = .yellow
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .yellow
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "collectionViewCell")
     }
 
@@ -58,12 +57,15 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (view.frame.width - Constants.insetBetweenItems * 2 - 16 * 2) / 3
-        return CGSize(width: size, height: size)
+        let width = (view.frame.width - Constants.insetBetweenItems * 2 -
+                        collectionViewFlowLayout.sectionInset.left + collectionViewFlowLayout.sectionInset.right) / 3
+        return CGSize(width: width, height: width)
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.insetBetweenRows
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.insetBetweenItems
     }
