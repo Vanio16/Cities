@@ -23,9 +23,9 @@ final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutpu
         self.window = window
         tabBarController.setViewControllers([mainViewController, newCollectionModule.viewController], animated: true)
         let items = tabBarController.tabBar.items
-        for item in 0..<tabBarItems.count {
-            items?[item].image = tabBarItems[item].image
-            items?[item].title = tabBarItems[item].title
+        for index in 0..<tabBarItems.count {
+            items?[index].image = tabBarItems[index].image
+            items?[index].title = tabBarItems[index].title
         }
         navigationController = .init(rootViewController: tabBarController)
         navigationController.navigationBar.isHidden = true
