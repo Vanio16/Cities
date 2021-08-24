@@ -39,7 +39,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.add(nameLabel, backButton, pictureImageView)
-        navigationController?.navigationBar.isHidden = true
     }
 
     override func viewDidLayoutSubviews() {
