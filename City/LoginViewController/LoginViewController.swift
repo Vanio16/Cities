@@ -10,112 +10,54 @@ import UIKit
 import Framezilla
 
 protocol LoginViewOutput {
-    //  func viewDidLoad()
-    //    func showDetailScreen(_ city: City)
+    func loadDataInPresenter(textFirstName: String, textLastName: String, textEmail: String, textPassword: String)
+//    -> (firstNameTextFieldBackgroundColor: UIColor, firstNameLabelIsHidden: Bool, lastNameTextFieldBackgroundColor: UIColor, lastNameLabelIsHidden: Bool, emailTextFieldBackgroundColor: UIColor, emailLabelIsHidden: Bool, emailLabelText: Bool, passwordTextFieldBackgroundColor: UIColor, passwordLabelIsHidden: Bool, passwordLabelText: Bool)
 }
 
 final class LoginViewController: UIViewController {
 
     private struct Constants {
-        static let firstNameTextFieldHeight: CGFloat = 40
-        static let firstNameTextFieldInsetTop: CGFloat = 16
-        static let firstNameTextFieldInsetRight: CGFloat = 16
-        static let firstNameTextFieldInsetLeft: CGFloat = 16
-        static let lastNameTextFieldHeight: CGFloat = 40
-        static let lastNameTextFieldInsetTop: CGFloat = 30
-        static let lastNameTextFieldInsetRight: CGFloat = 16
-        static let lastNameTextFieldInsetLeft: CGFloat = 16
-        static let emailTextFieldHeight: CGFloat = 40
-        static let emailTextFieldInsetTop: CGFloat = 30
-        static let emailTextFieldInsetRight: CGFloat = 16
-        static let emailTextFieldInsetLeft: CGFloat = 16
-        static let passwordTextFieldHeight: CGFloat = 40
-        static let passwordTextFieldInsetTop: CGFloat = 30
-        static let passwordTextFieldInsetRight: CGFloat = 16
-        static let passwordTextFieldInsetLeft: CGFloat = 16
+        static let firstNameFieldInsetTop: CGFloat = 16
+        static let firstNameFieldInsetRight: CGFloat = 16
+        static let firstNameFieldInsetLeft: CGFloat = 16
+        static let firstNameFieldHight: CGFloat = 50
+        static let lastNameFieldHeight: CGFloat = 50
+        static let lastNameFieldInsetTop: CGFloat = 30
+        static let lastNameFieldInsetRight: CGFloat = 16
+        static let lastNameFieldInsetLeft: CGFloat = 16
+        static let emailFieldHeight: CGFloat = 50
+        static let emailFieldInsetTop: CGFloat = 30
+        static let emailFieldInsetRight: CGFloat = 16
+        static let emailFieldInsetLeft: CGFloat = 16
+        static let passwordFieldHeight: CGFloat = 50
+        static let passwordFieldInsetTop: CGFloat = 30
+        static let passwordFieldInsetRight: CGFloat = 16
+        static let passwordFieldInsetLeft: CGFloat = 16
         static let hidePasswordButtonInsetTop: CGFloat = 1
         static let hidePasswordButtonSize: CGSize = .init(width: 30, height: 30)
         static let hidePasswordButtonInsetRight: CGFloat = 16
         static let sendButtonInsetTop: CGFloat = 30
-        static let firstNameErrorTextInsetTop = 1
-        static let firstNameErrorTextInsetLeft = 16
-        static let lastNameErrorTextInsetTop = 1
-        static let lastNameErrorTextInsetLeft = 16
-        static let emailErrorTextInsetTop = 1
-        static let emailErrorTextInsetLeft = 16
-        static let passwordErrorTextInsetTop = 1
-        static let passwordErrorTextInsetLeft = 16
     }
-
+    var hidePasswordButtonTap = false
+    let imageEye = UIImage(systemName: "eye")
+    let imageClosedEye = UIImage(systemName: "eye.slash")
     var output: LoginViewOutput
+    var firstNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
+    var lastNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
+    var emailLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
+    var passwordLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Пароль не может быть короче 6 символов")
 
     // MARK: - Subview
 
-    private let firstNameErrorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.text = "Это поле не может быть пустым"
-        label.font = UIFont(name: "Arial", size: 12)
-        label.isHidden = true
-        return label
-    }()
-    private let lastNameErrorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.text = "Это поле не может быть пустым"
-        label.font = UIFont(name: "Arial", size: 12)
-        label.isHidden = true
-        return label
-    }()
-    private let emailErrorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.text = "Это поле не может быть пустым"
-        label.font = UIFont(name: "Arial", size: 12)
-        label.isHidden = true
-        return label
-    }()
-    private let passwordErrorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .red
-        label.text = "Пароль не может быть короче 6 символов"
-        label.font = UIFont(name: "Arial", size: 12)
-        label.isHidden = true
-        return label
-    }()
-    private let firstNameTextField: UITextField = {
-        let textField = UITextField()
-        textField.clearButtonMode = .whileEditing
-        textField.placeholder = "First name*"
-        textField.borderStyle = .roundedRect
-        return textField
-    }()
-    private let lastNameTextField: UITextField = {
-        let textField = UITextField()
-        textField.clearButtonMode = .whileEditing
-        textField.placeholder = "Last name*"
-        textField.borderStyle = .roundedRect
-        return textField
-    }()
-    private let emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.clearButtonMode = .whileEditing
-        textField.placeholder = "E-mail*"
-        textField.borderStyle = .roundedRect
-        textField.keyboardType = .emailAddress
-        return textField
-    }()
-    private let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.clearButtonMode = .whileEditing
-        textField.placeholder = "Password*"
-        textField.borderStyle = .roundedRect
-        return textField
-    }()
+    private lazy var firstNameField = LoginTextFieldView(placeholderText: "First name*", errorText: firstNameLoginTextViewModel.errorText, secureText: false)
+    private lazy var lastNameField = LoginTextFieldView(placeholderText: "Last name*", errorText: lastNameLoginTextViewModel.errorText, secureText: false)
+    private lazy var emailField = LoginTextFieldView(placeholderText: "E-mail*", errorText: emailLoginTextViewModel.errorText, secureText: false)
+    private lazy var passwordField = LoginTextFieldView(placeholderText: "Password*", errorText: passwordLoginTextViewModel.errorText, secureText: true)
     private let hidePasswordButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "eye.slash")
-        button.tintColor = .black   //     button.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
+        let image = UIImage(systemName: "eye")
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
@@ -139,117 +81,76 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // output.viewDidLoad()
-        view.add(firstNameTextField, lastNameTextField, emailTextField, passwordTextField, hidePasswordButton, sendButton, firstNameErrorLabel, lastNameErrorLabel, emailErrorLabel, passwordErrorLabel)
+        view.add(firstNameField, lastNameField, emailField, passwordField, hidePasswordButton, sendButton)
         view.backgroundColor = .orange
     }
 
     // MARK: - Layout
 
     override func viewDidLayoutSubviews() {
-        firstNameTextField.configureFrame { maker in
-            maker.top(to: view.nui_safeArea.top, inset: Constants.firstNameTextFieldInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.firstNameTextFieldInsetLeft)
-                .right(to: view.nui_safeArea.right, inset: Constants.firstNameTextFieldInsetRight)
-                .height(Constants.firstNameTextFieldHeight)
+        firstNameField.configureFrame { maker in
+            maker.top(to: view.nui_safeArea.top, inset: Constants.firstNameFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.firstNameFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.firstNameFieldInsetRight)
+                .height(Constants.firstNameFieldHight)
         }
 
-        lastNameTextField.configureFrame { maker in
-            maker.top(to: firstNameTextField.nui_bottom, inset: Constants.lastNameTextFieldInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.lastNameTextFieldInsetLeft)
-                .right(to: view.nui_safeArea.right, inset: Constants.lastNameTextFieldInsetRight)
-                .height(Constants.lastNameTextFieldHeight)
+        lastNameField.configureFrame { maker in
+            maker.top(to: firstNameField.nui_bottom, inset: Constants.lastNameFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.lastNameFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.lastNameFieldInsetRight)
+                .height(Constants.lastNameFieldHeight)
         }
 
-        emailTextField.configureFrame { maker in
-            maker.top(to: lastNameTextField.nui_bottom, inset: Constants.emailTextFieldInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.emailTextFieldInsetLeft)
-                .right(to: view.nui_safeArea.right, inset: Constants.emailTextFieldInsetRight)
-                .height(Constants.emailTextFieldHeight)
+        emailField.configureFrame { maker in
+            maker.top(to: lastNameField.nui_bottom, inset: Constants.emailFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.emailFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.emailFieldInsetRight)
+                .height(Constants.emailFieldHeight)
         }
 
-        passwordTextField.configureFrame { maker in
-            maker.top(to: emailTextField.nui_bottom, inset: Constants.passwordTextFieldInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.passwordTextFieldInsetLeft)
-                .right(to: view.nui_safeArea.right, inset: Constants.passwordTextFieldInsetRight)
-                .height(Constants.passwordTextFieldHeight)
-        }
-
-        firstNameErrorLabel.configureFrame { maker in
-            maker.top(to: firstNameTextField.nui_bottom, inset: Constants.firstNameErrorTextInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.firstNameErrorTextInsetLeft)
-                .sizeToFit()
-        }
-
-        lastNameErrorLabel.configureFrame { maker in
-            maker.top(to: lastNameTextField.nui_bottom, inset: Constants.lastNameErrorTextInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.lastNameErrorTextInsetLeft)
-                .sizeToFit()
-        }
-
-        emailErrorLabel.configureFrame { maker in
-            maker.top(to: emailTextField.nui_bottom, inset: Constants.emailErrorTextInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.emailErrorTextInsetLeft)
-                .sizeToFit()
-        }
-
-        passwordErrorLabel.configureFrame { maker in
-            maker.top(to: passwordTextField.nui_bottom, inset: Constants.passwordErrorTextInsetTop)
-                .left(to: view.nui_safeArea.left, inset: Constants.passwordErrorTextInsetLeft)
-                .sizeToFit()
+        passwordField.configureFrame { maker in
+            maker.top(to: emailField.nui_bottom, inset: Constants.passwordFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.passwordFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.passwordFieldInsetRight)
+                .height(Constants.passwordFieldHeight)
         }
 
         hidePasswordButton.configureFrame { maker in
             maker.size(Constants.hidePasswordButtonSize)
-                .top(to: passwordTextField.nui_bottom, inset: Constants.hidePasswordButtonInsetTop)
+                .top(to: passwordField.nui_bottom, inset: Constants.hidePasswordButtonInsetTop)
                 .right(to: view.nui_safeArea.right, inset: Constants.hidePasswordButtonInsetRight)
         }
 
         sendButton.configureFrame { maker in
             maker.sizeToFit()
                 .centerX()
-                .top(to: passwordTextField.nui_bottom, inset: Constants.sendButtonInsetTop)
+                .top(to: passwordField.nui_bottom, inset: Constants.sendButtonInsetTop)
         }
     }
 
     // MARK: - Actions
 
+    @objc private func hidePassword() {
+        hidePasswordButtonTap = !hidePasswordButtonTap
+        if hidePasswordButtonTap {
+            hidePasswordButton.setImage(imageClosedEye, for: .normal)
+            passwordField.textField.isSecureTextEntry = false
+        }
+        else {
+        hidePasswordButton.setImage(imageEye, for: .normal)
+            passwordField.textField.isSecureTextEntry = true
+        }
+    }
+
     @objc private func sendUserInfo() {
-        if firstNameTextField.text?.count == 0 {
-            firstNameTextField.backgroundColor = .systemPink
-            firstNameErrorLabel.isHidden = false
-        }
-        else {
-            firstNameTextField.backgroundColor = .green
-            firstNameErrorLabel.isHidden = true
-        }
-
-        if lastNameTextField.text?.count == 0 {
-            lastNameTextField.backgroundColor = .systemPink
-            lastNameErrorLabel.isHidden = false
-        }
-        else {
-            lastNameTextField.backgroundColor = .green
-            lastNameErrorLabel.isHidden = true
-        }
-
-        if emailTextField.text?.count == 0 {
-            emailTextField.backgroundColor = .systemPink
-            emailErrorLabel.isHidden = false
-        }
-        else {
-            emailTextField.backgroundColor = .green
-            emailErrorLabel.isHidden = true
-        }
-
-        if passwordTextField.text?.count ?? 0 < 6 {
-            passwordTextField.backgroundColor = .systemPink
-            passwordErrorLabel.isHidden = false
-        }
-        else {
-            passwordTextField.backgroundColor = .green
-            passwordErrorLabel.isHidden = true
-        }
+        output.loadDataInPresenter(textFirstName: firstNameField.textField.text ?? "", textLastName: lastNameField.textField.text ?? "", textEmail: emailField.textField.text ?? "", textPassword: passwordField.textField.text ?? "")
         view.endEditing(true)
+    }
+    func update() {
+        firstNameField.update(viewModel: firstNameLoginTextViewModel)
+        lastNameField.update(viewModel: lastNameLoginTextViewModel)
+        emailField.update(viewModel: emailLoginTextViewModel)
+        passwordField.update(viewModel: passwordLoginTextViewModel)
     }
 }
