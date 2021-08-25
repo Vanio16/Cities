@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Framezilla
 
 protocol NewCollectionViewOutput {
     func viewDidLoad()
