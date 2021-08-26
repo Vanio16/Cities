@@ -10,7 +10,13 @@ import UIKit
 import Framezilla
 
 protocol LoginViewOutput {
-    func sendData(textFirstName: String, textLastName: String, textEmail: String, textPassword: String)
+    func sendData(firstName: LoginTextFieldViewModel,
+                  lastName: LoginTextFieldViewModel,
+                  email: LoginTextFieldViewModel,
+                  password: LoginTextFieldViewModel,
+                  username: LoginTextFieldViewModel,
+                  address: LoginTextFieldViewModel,
+                  phoneNumber: LoginTextFieldViewModel)
     func togglePasswordSecure()
 }
 
@@ -20,37 +26,66 @@ final class LoginViewController: UIViewController {
         static let firstNameFieldInsetTop: CGFloat = 16
         static let firstNameFieldInsetRight: CGFloat = 16
         static let firstNameFieldInsetLeft: CGFloat = 16
-        static let firstNameFieldHight: CGFloat = 50
+        static let firstNameFieldHeight: CGFloat = 50
         static let lastNameFieldHeight: CGFloat = 50
-        static let lastNameFieldInsetTop: CGFloat = 30
+        static let lastNameFieldInsetTop: CGFloat = 20
         static let lastNameFieldInsetRight: CGFloat = 16
         static let lastNameFieldInsetLeft: CGFloat = 16
         static let emailFieldHeight: CGFloat = 50
-        static let emailFieldInsetTop: CGFloat = 30
+        static let emailFieldInsetTop: CGFloat = 20
         static let emailFieldInsetRight: CGFloat = 16
         static let emailFieldInsetLeft: CGFloat = 16
         static let passwordFieldHeight: CGFloat = 50
-        static let passwordFieldInsetTop: CGFloat = 30
+        static let passwordFieldInsetTop: CGFloat = 20
         static let passwordFieldInsetRight: CGFloat = 16
         static let passwordFieldInsetLeft: CGFloat = 16
         static let hidePasswordButtonInsetTop: CGFloat = 1
         static let hidePasswordButtonSize: CGSize = .init(width: 30, height: 30)
         static let hidePasswordButtonInsetRight: CGFloat = 16
         static let sendButtonInsetTop: CGFloat = 30
+        static let usernameFieldInsetTop: CGFloat = 35
+        static let usernameFieldInsetRight: CGFloat = 16
+        static let usernameFieldInsetLeft: CGFloat = 16
+        static let usernameFieldHeight: CGFloat = 50
+        static let addressFieldInsetTop: CGFloat = 20
+        static let addressFieldInsetRight: CGFloat = 16
+        static let addressFieldInsetLeft: CGFloat = 16
+        static let addressFieldHeight: CGFloat = 50
+        static let phoneNumberFieldInsetTop: CGFloat = 20
+        static let phoneNumberFieldInsetRight: CGFloat = 16
+        static let phoneNumberFieldInsetLeft: CGFloat = 16
+        static let phoneNumberFieldHeight: CGFloat = 50
     }
+    var oldPhoneFieldText: String = ""
     var output: LoginViewOutput
     var firstNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
                                                                      color: .red,
-                                                                     errorText: "Это поле не может быть пустым")
+                                                                     errorText: "Это поле не может быть пустым",
+                                                                     text: "")
     var lastNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
                                                                     color: .red,
-                                                                    errorText: "Это поле не может быть пустым")
+                                                                    errorText: "Это поле не может быть пустым",
+                                                                    text: "")
     var emailLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
                                                                  color: .red,
-                                                                 errorText: "Это поле не может быть пустым")
+                                                                 errorText: "Это поле не может быть пустым",
+                                                                 text: "")
     var passwordLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
                                                                     color: .red,
-                                                                    errorText: "Пароль не может быть короче 6 символов")
+                                                                    errorText: "Пароль не может быть короче 6 символов",
+                                                                    text: "")
+    var usernameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                    color: .red,
+                                                                    errorText: "Это поле не может быть пустым",
+                                                                    text: "")
+    var addressLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                   color: .red,
+                                                                   errorText: "Это поле не может быть пустым",
+                                                                   text: "")
+    var phoneNumberLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                       color: .red,
+                                                                       errorText: "Это поле не может быть пустым",
+                                                                       text: "")
 
     // MARK: - Subview
 
@@ -66,6 +101,16 @@ final class LoginViewController: UIViewController {
     lazy var passwordField = LoginTextFieldView(placeholderText: "Password*",
                                                 errorText: passwordLoginTextViewModel.errorText,
                                                 isTextSecure: true)
+    private lazy var usernameField = LoginTextFieldView(placeholderText: "Username*",
+                                                        errorText: usernameLoginTextViewModel.errorText,
+                                                        isTextSecure: false)
+    private lazy var addressField = LoginTextFieldView(placeholderText: "Home address*",
+                                                       errorText: addressLoginTextViewModel.errorText,
+                                                       isTextSecure: false)
+    private lazy var phoneNumberField = LoginTextFieldView(placeholderText: "Phone number*",
+                                                           errorText: passwordLoginTextViewModel.errorText,
+                                                           isTextSecure: false)
+
     let hidePasswordButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "eye")
@@ -94,8 +139,16 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.add(firstNameField, lastNameField, emailField, passwordField, hidePasswordButton, sendButton)
+        view.add(firstNameField,
+                 lastNameField,
+                 emailField, passwordField,
+                 hidePasswordButton,
+                 sendButton,
+                 addressField,
+                 usernameField,
+                 phoneNumberField)
         view.backgroundColor = .orange
+        phoneNumberField.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
 
     // MARK: - Layout
@@ -105,7 +158,7 @@ final class LoginViewController: UIViewController {
             maker.top(to: view.nui_safeArea.top, inset: Constants.firstNameFieldInsetTop)
                 .left(to: view.nui_safeArea.left, inset: Constants.firstNameFieldInsetLeft)
                 .right(to: view.nui_safeArea.right, inset: Constants.firstNameFieldInsetRight)
-                .height(Constants.firstNameFieldHight)
+                .height(Constants.firstNameFieldHeight)
         }
 
         lastNameField.configureFrame { maker in
@@ -135,10 +188,31 @@ final class LoginViewController: UIViewController {
                 .right(to: view.nui_safeArea.right, inset: Constants.hidePasswordButtonInsetRight)
         }
 
+        usernameField.configureFrame { maker in
+            maker.top(to: passwordField.nui_bottom, inset: Constants.usernameFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.usernameFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.usernameFieldInsetRight)
+                .height(Constants.usernameFieldHeight)
+        }
+
+        addressField.configureFrame { maker in
+            maker.top(to: usernameField.nui_bottom, inset: Constants.addressFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.addressFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.addressFieldInsetRight)
+                .height(Constants.addressFieldHeight)
+        }
+
+        phoneNumberField.configureFrame { maker in
+            maker.top(to: addressField.nui_bottom, inset: Constants.phoneNumberFieldInsetTop)
+                .left(to: view.nui_safeArea.left, inset: Constants.phoneNumberFieldInsetLeft)
+                .right(to: view.nui_safeArea.right, inset: Constants.phoneNumberFieldInsetRight)
+                .height(Constants.phoneNumberFieldHeight)
+        }
+
         sendButton.configureFrame { maker in
             maker.sizeToFit()
                 .centerX()
-                .top(to: passwordField.nui_bottom, inset: Constants.sendButtonInsetTop)
+                .top(to: phoneNumberField.nui_bottom, inset: Constants.sendButtonInsetTop)
         }
     }
 
@@ -148,11 +222,55 @@ final class LoginViewController: UIViewController {
         output.togglePasswordSecure()
     }
 
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else {
+            return
+        }
+        let firstSymbol = text.first
+        let lastSymbol = String(text.suffix(1))
+        if text.count == 1 {
+            let phoneNumRegEx = "[0-9+]"
+            let phoneNumPred = NSPredicate(format: "SELF MATCHES %@", phoneNumRegEx)
+            if !phoneNumPred.evaluate(with: text) {
+                textField.text = oldPhoneFieldText
+                return
+            }
+        }
+        if text.count > 1 {
+            let phoneNumRegEx = "[0-9]"
+            let phoneNumPred = NSPredicate(format: "SELF MATCHES %@", phoneNumRegEx)
+            if !phoneNumPred.evaluate(with: lastSymbol) {
+                textField.text = oldPhoneFieldText
+                return
+            }
+        }
+        if firstSymbol == "+" && text.count > 12 {
+            textField.text = oldPhoneFieldText
+            return
+        }
+        if firstSymbol != "+" && text.count > 11 {
+            textField.text = oldPhoneFieldText
+            return
+        }
+        oldPhoneFieldText = text
+    }
+
     @objc private func sendUserInfo() {
-        output.sendData(textFirstName: firstNameField.textField.text ?? "",
-                        textLastName: lastNameField.textField.text ?? "",
-                        textEmail: emailField.textField.text ?? "",
-                        textPassword: passwordField.textField.text ?? "")
+        firstNameLoginTextViewModel.text = firstNameField.textField.text ?? ""
+        lastNameLoginTextViewModel.text = lastNameField.textField.text ?? ""
+        emailLoginTextViewModel.text = emailField.textField.text ?? ""
+        passwordLoginTextViewModel.text = passwordField.textField.text ?? ""
+        usernameLoginTextViewModel.text = usernameField.textField.text ?? ""
+        addressLoginTextViewModel.text = addressField.textField.text ?? ""
+        phoneNumberLoginTextViewModel.text = phoneNumberField.textField.text ?? ""
+
+        output.sendData(firstName: firstNameLoginTextViewModel,
+                        lastName: lastNameLoginTextViewModel,
+                        email: emailLoginTextViewModel,
+                        password: passwordLoginTextViewModel,
+                        username: usernameLoginTextViewModel,
+                        address: addressLoginTextViewModel,
+                        phoneNumber: phoneNumberLoginTextViewModel)
         view.endEditing(true)
     }
     func update() {
@@ -160,5 +278,8 @@ final class LoginViewController: UIViewController {
         lastNameField.update(viewModel: lastNameLoginTextViewModel)
         emailField.update(viewModel: emailLoginTextViewModel)
         passwordField.update(viewModel: passwordLoginTextViewModel)
+        usernameField.update(viewModel: usernameLoginTextViewModel)
+        addressField.update(viewModel: addressLoginTextViewModel)
+        phoneNumberField.update(viewModel: phoneNumberLoginTextViewModel)
     }
 }
