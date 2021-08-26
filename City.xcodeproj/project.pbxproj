@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9707CB9C26D63A3900449BE8 /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707CB9B26D63A3900449BE8 /* LoginTextFieldView.swift */; };
+		9707CB9E26D6694200449BE8 /* LoginTextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707CB9D26D6694200449BE8 /* LoginTextFieldViewModel.swift */; };
 		9711AFE226D3692E00403DF5 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFE126D3692E00403DF5 /* UIViewController+Preview.swift */; };
 		9711AFE526D3A3C600403DF5 /* CitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFE426D3A3C600403DF5 /* CitiesService.swift */; };
 		9711AFE926D3B42300403DF5 /* NewCollectionModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFE826D3B42300403DF5 /* NewCollectionModule.swift */; };
@@ -14,6 +16,10 @@
 		9711AFED26D3B53800403DF5 /* NewCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFEC26D3B53800403DF5 /* NewCollectionPresenter.swift */; };
 		9711AFEF26D3B5AF00403DF5 /* NewCollectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFEE26D3B5AF00403DF5 /* NewCollectionState.swift */; };
 		9711AFF126D3BA6F00403DF5 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711AFF026D3BA6F00403DF5 /* MainCoordinator.swift */; };
+		9743B1FC26D4E0CD009B23B7 /* LoginModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743B1FB26D4E0CD009B23B7 /* LoginModule.swift */; };
+		9743B1FE26D4E0E7009B23B7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743B1FD26D4E0E7009B23B7 /* LoginViewController.swift */; };
+		9743B20026D4E102009B23B7 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743B1FF26D4E102009B23B7 /* LoginPresenter.swift */; };
+		9743B20226D4E112009B23B7 /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743B20126D4E112009B23B7 /* LoginState.swift */; };
 		97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4926CFBC4B004F8EAC /* TabBarController.swift */; };
 		97738D4D26CFBDAD004F8EAC /* CollectonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */; };
 		97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */; };
@@ -32,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9707CB9B26D63A3900449BE8 /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
+		9707CB9D26D6694200449BE8 /* LoginTextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldViewModel.swift; sourceTree = "<group>"; };
 		9711AFE126D3692E00403DF5 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		9711AFE426D3A3C600403DF5 /* CitiesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesService.swift; sourceTree = "<group>"; };
 		9711AFE826D3B42300403DF5 /* NewCollectionModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionModule.swift; sourceTree = "<group>"; };
@@ -39,6 +47,10 @@
 		9711AFEC26D3B53800403DF5 /* NewCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionPresenter.swift; sourceTree = "<group>"; };
 		9711AFEE26D3B5AF00403DF5 /* NewCollectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCollectionState.swift; sourceTree = "<group>"; };
 		9711AFF026D3BA6F00403DF5 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		9743B1FB26D4E0CD009B23B7 /* LoginModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModule.swift; sourceTree = "<group>"; };
+		9743B1FD26D4E0E7009B23B7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9743B1FF26D4E102009B23B7 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		9743B20126D4E112009B23B7 /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
 		97738D4926CFBC4B004F8EAC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		97738D4C26CFBDAD004F8EAC /* CollectonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectonViewController.swift; sourceTree = "<group>"; };
 		97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -89,11 +101,24 @@
 			path = NewCollectionViewController;
 			sourceTree = "<group>";
 		};
+		9743B1FA26D4E02D009B23B7 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9743B1FB26D4E0CD009B23B7 /* LoginModule.swift */,
+				9743B1FD26D4E0E7009B23B7 /* LoginViewController.swift */,
+				9743B1FF26D4E102009B23B7 /* LoginPresenter.swift */,
+				9743B20126D4E112009B23B7 /* LoginState.swift */,
+				9707CB9B26D63A3900449BE8 /* LoginTextFieldView.swift */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
 		97738D4226CFBB81004F8EAC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				979E334926CF706B00A89FFB /* City.swift */,
 				97738D4E26CFC8FA004F8EAC /* TabBarItem.swift */,
+				9707CB9D26D6694200449BE8 /* LoginTextFieldViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -101,6 +126,9 @@
 		97738D4326CFBB9A004F8EAC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				97738D4B26CFBD88004F8EAC /* CollectionViewController */,
+				9711AFE726D3B32300403DF5 /* NewCollectionViewController */,
+				9743B1FA26D4E02D009B23B7 /* LoginViewController */,
 				97738D4526CFBBB6004F8EAC /* DetailViewController */,
 				97738D4426CFBBAC004F8EAC /* MainViewController */,
 			);
@@ -179,9 +207,7 @@
 		979E332C26CF6E7900A89FFB /* City */ = {
 			isa = PBXGroup;
 			children = (
-				9711AFE726D3B32300403DF5 /* NewCollectionViewController */,
 				9711AFE326D3A39800403DF5 /* Services */,
-				97738D4B26CFBD88004F8EAC /* CollectionViewController */,
 				97738D4826CFBC23004F8EAC /* TabBarController */,
 				97738D4726CFBBF9004F8EAC /* Extensions */,
 				97738D4626CFBBE7004F8EAC /* Coordinators */,
@@ -314,9 +340,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9707CB9C26D63A3900449BE8 /* LoginTextFieldView.swift in Sources */,
+				9743B1FE26D4E0E7009B23B7 /* LoginViewController.swift in Sources */,
 				979E335226CF716200A89FFB /* Coordinator.swift in Sources */,
 				979E334C26CF706B00A89FFB /* TableViewCell.swift in Sources */,
 				979E334E26CF706B00A89FFB /* City.swift in Sources */,
+				9743B20026D4E102009B23B7 /* LoginPresenter.swift in Sources */,
+				9707CB9E26D6694200449BE8 /* LoginTextFieldViewModel.swift in Sources */,
+				9743B1FC26D4E0CD009B23B7 /* LoginModule.swift in Sources */,
 				9711AFEB26D3B4EE00403DF5 /* NewCollectionViewController.swift in Sources */,
 				97738D4A26CFBC4B004F8EAC /* TabBarController.swift in Sources */,
 				97738D4F26CFC8FA004F8EAC /* TabBarItem.swift in Sources */,
@@ -333,6 +364,7 @@
 				979E334F26CF706B00A89FFB /* DetailViewController.swift in Sources */,
 				9711AFE926D3B42300403DF5 /* NewCollectionModule.swift in Sources */,
 				97738D5126CFCF0B004F8EAC /* CollectionViewCell.swift in Sources */,
+				9743B20226D4E112009B23B7 /* LoginState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

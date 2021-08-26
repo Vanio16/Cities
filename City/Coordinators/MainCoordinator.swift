@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutput {
+final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutput, LoginModuleOutput {
 
     let window: UIWindow
     var navigationController: UINavigationController
@@ -16,12 +16,17 @@ final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutpu
     let mainViewController = MainViewController()
     let detailViewController = DetailViewController()
     var tabBarItems = [TabBarItem(title: "Таблица", imageName: "rectangle.grid.1x2.fill"),
-    TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill")]
+                       TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill"),
+                       TabBarItem(title: "Вход", imageName: "person.fill")]
     let newCollectionModule: NewCollectionModule = .init()
+    let loginModule: LoginModule = .init()
 
     init(window: UIWindow) {
         self.window = window
-        tabBarController.setViewControllers([mainViewController, newCollectionModule.viewController], animated: true)
+        tabBarController.setViewControllers([mainViewController,
+                                             newCollectionModule.viewController,
+                                             loginModule.viewController],
+                                            animated: true)
         let items = tabBarController.tabBar.items
         for index in 0..<tabBarItems.count {
             items?[index].image = tabBarItems[index].image
@@ -35,6 +40,7 @@ final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutpu
         mainViewController.output = self
         detailViewController.output = self
         newCollectionModule.output = self
+        loginModule.output = self
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }

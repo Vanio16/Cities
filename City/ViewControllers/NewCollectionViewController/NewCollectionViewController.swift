@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Framezilla
 
 protocol NewCollectionViewOutput {
     func viewDidLoad()
@@ -54,7 +55,7 @@ final class NewCollectionViewController: UIViewController {
         view.backgroundColor = .blue
     }
 
-// MARK: - Layout
+    // MARK: - Layout
 
     override func viewDidLayoutSubviews() {
         collectionView.configureFrame { maker in

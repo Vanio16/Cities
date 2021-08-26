@@ -15,23 +15,23 @@ final class CitiesService {
     }()
 
     private var cities = [City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk"),
-                  City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk"),
-                  City(name: "Omsk", picture: "omsk"),
-                  City(name: "Moscow", picture: "moscow"),
-                  City(name: "St. Petersburg", picture: "piter"),
-                  City(name: "Novosibirsk", picture: "novosib"),
-                  City(name: "Samara", picture: "samara"),
-                  City(name: "Irkutsk", picture: "irkutsk")]
+                          City(name: "Moscow", picture: "moscow"),
+                          City(name: "St. Petersburg", picture: "piter"),
+                          City(name: "Novosibirsk", picture: "novosib"),
+                          City(name: "Samara", picture: "samara"),
+                          City(name: "Irkutsk", picture: "irkutsk"),
+                          City(name: "Omsk", picture: "omsk"),
+                          City(name: "Moscow", picture: "moscow"),
+                          City(name: "St. Petersburg", picture: "piter"),
+                          City(name: "Novosibirsk", picture: "novosib"),
+                          City(name: "Samara", picture: "samara"),
+                          City(name: "Irkutsk", picture: "irkutsk"),
+                          City(name: "Omsk", picture: "omsk"),
+                          City(name: "Moscow", picture: "moscow"),
+                          City(name: "St. Petersburg", picture: "piter"),
+                          City(name: "Novosibirsk", picture: "novosib"),
+                          City(name: "Samara", picture: "samara"),
+                          City(name: "Irkutsk", picture: "irkutsk")]
 
     func getCity () -> [City] {
         return cities
