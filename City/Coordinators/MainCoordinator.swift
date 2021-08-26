@@ -23,8 +23,10 @@ final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutpu
 
     init(window: UIWindow) {
         self.window = window
-        tabBarController.setViewControllers([mainViewController, newCollectionModule.viewController,
-                                             loginModule.viewController], animated: true)
+        tabBarController.setViewControllers([mainViewController,
+                                             newCollectionModule.viewController,
+                                             loginModule.viewController],
+                                            animated: true)
         let items = tabBarController.tabBar.items
         for index in 0..<tabBarItems.count {
             items?[index].image = tabBarItems[index].image
