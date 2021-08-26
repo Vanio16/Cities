@@ -126,6 +126,9 @@
 		97738D4326CFBB9A004F8EAC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				97738D4B26CFBD88004F8EAC /* CollectionViewController */,
+				9711AFE726D3B32300403DF5 /* NewCollectionViewController */,
+				9743B1FA26D4E02D009B23B7 /* LoginViewController */,
 				97738D4526CFBBB6004F8EAC /* DetailViewController */,
 				97738D4426CFBBAC004F8EAC /* MainViewController */,
 			);
@@ -204,10 +207,7 @@
 		979E332C26CF6E7900A89FFB /* City */ = {
 			isa = PBXGroup;
 			children = (
-				9743B1FA26D4E02D009B23B7 /* LoginViewController */,
-				9711AFE726D3B32300403DF5 /* NewCollectionViewController */,
 				9711AFE326D3A39800403DF5 /* Services */,
-				97738D4B26CFBD88004F8EAC /* CollectionViewController */,
 				97738D4826CFBC23004F8EAC /* TabBarController */,
 				97738D4726CFBBF9004F8EAC /* Extensions */,
 				97738D4626CFBBE7004F8EAC /* Coordinators */,

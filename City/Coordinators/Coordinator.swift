@@ -17,7 +17,7 @@ final class Coordinator: MainViewControllerOutput, DetailViewControllerOutput {
     let detailViewController = DetailViewController()
     let collectionViewController = CollectionViewController()
     var tabBarItems = [TabBarItem(title: "Таблица", imageName: "rectangle.grid.1x2.fill"),
-    TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill")]
+                       TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill")]
 
     init(window: UIWindow) {
         self.window = window

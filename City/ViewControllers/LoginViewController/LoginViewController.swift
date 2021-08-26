@@ -10,8 +10,8 @@ import UIKit
 import Framezilla
 
 protocol LoginViewOutput {
-    func loadDataInPresenter(textFirstName: String, textLastName: String, textEmail: String, textPassword: String)
-//    -> (firstNameTextFieldBackgroundColor: UIColor, firstNameLabelIsHidden: Bool, lastNameTextFieldBackgroundColor: UIColor, lastNameLabelIsHidden: Bool, emailTextFieldBackgroundColor: UIColor, emailLabelIsHidden: Bool, emailLabelText: Bool, passwordTextFieldBackgroundColor: UIColor, passwordLabelIsHidden: Bool, passwordLabelText: Bool)
+    func sendData(textFirstName: String, textLastName: String, textEmail: String, textPassword: String)
+    func togglePasswordSecure()
 }
 
 final class LoginViewController: UIViewController {
@@ -38,26 +38,39 @@ final class LoginViewController: UIViewController {
         static let hidePasswordButtonInsetRight: CGFloat = 16
         static let sendButtonInsetTop: CGFloat = 30
     }
-    var hidePasswordButtonTap = false
-    let imageEye = UIImage(systemName: "eye")
-    let imageClosedEye = UIImage(systemName: "eye.slash")
     var output: LoginViewOutput
-    var firstNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
-    var lastNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
-    var emailLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Это поле не может быть пустым")
-    var passwordLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false, color: .red, errorText: "Пароль не может быть короче 6 символов")
+    var firstNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                     color: .red,
+                                                                     errorText: "Это поле не может быть пустым")
+    var lastNameLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                    color: .red,
+                                                                    errorText: "Это поле не может быть пустым")
+    var emailLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                 color: .red,
+                                                                 errorText: "Это поле не может быть пустым")
+    var passwordLoginTextViewModel: LoginTextFieldViewModel = .init(isHidden: false,
+                                                                    color: .red,
+                                                                    errorText: "Пароль не может быть короче 6 символов")
 
     // MARK: - Subview
 
-    private lazy var firstNameField = LoginTextFieldView(placeholderText: "First name*", errorText: firstNameLoginTextViewModel.errorText, secureText: false)
-    private lazy var lastNameField = LoginTextFieldView(placeholderText: "Last name*", errorText: lastNameLoginTextViewModel.errorText, secureText: false)
-    private lazy var emailField = LoginTextFieldView(placeholderText: "E-mail*", errorText: emailLoginTextViewModel.errorText, secureText: false)
-    private lazy var passwordField = LoginTextFieldView(placeholderText: "Password*", errorText: passwordLoginTextViewModel.errorText, secureText: true)
-    private let hidePasswordButton: UIButton = {
+    private lazy var firstNameField = LoginTextFieldView(placeholderText: "First name*",
+                                                         errorText: firstNameLoginTextViewModel.errorText,
+                                                         isTextSecure: false)
+    private lazy var lastNameField = LoginTextFieldView(placeholderText: "Last name*",
+                                                        errorText: lastNameLoginTextViewModel.errorText,
+                                                        isTextSecure: false)
+    private lazy var emailField = LoginTextFieldView(placeholderText: "E-mail*",
+                                                     errorText: emailLoginTextViewModel.errorText,
+                                                     isTextSecure: false)
+    lazy var passwordField = LoginTextFieldView(placeholderText: "Password*",
+                                                errorText: passwordLoginTextViewModel.errorText,
+                                                isTextSecure: true)
+    let hidePasswordButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "eye")
         button.tintColor = .black
-        button.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapHidePasswordButton), for: .touchUpInside)
         button.setImage(image, for: .normal)
         return button
     }()
@@ -131,20 +144,15 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Actions
 
-    @objc private func hidePassword() {
-        hidePasswordButtonTap = !hidePasswordButtonTap
-        if hidePasswordButtonTap {
-            hidePasswordButton.setImage(imageClosedEye, for: .normal)
-            passwordField.textField.isSecureTextEntry = false
-        }
-        else {
-        hidePasswordButton.setImage(imageEye, for: .normal)
-            passwordField.textField.isSecureTextEntry = true
-        }
+    @objc private func tapHidePasswordButton() {
+        output.togglePasswordSecure()
     }
 
     @objc private func sendUserInfo() {
-        output.loadDataInPresenter(textFirstName: firstNameField.textField.text ?? "", textLastName: lastNameField.textField.text ?? "", textEmail: emailField.textField.text ?? "", textPassword: passwordField.textField.text ?? "")
+        output.sendData(textFirstName: firstNameField.textField.text ?? "",
+                        textLastName: lastNameField.textField.text ?? "",
+                        textEmail: emailField.textField.text ?? "",
+                        textPassword: passwordField.textField.text ?? "")
         view.endEditing(true)
     }
     func update() {

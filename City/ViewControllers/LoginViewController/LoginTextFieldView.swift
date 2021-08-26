@@ -11,12 +11,17 @@ import Framezilla
 
 final class LoginTextFieldView: UIView {
 
+    private struct Constants {
+        static let textFieldHeight: CGFloat = 40
+        static let labelInsetTop: CGFloat = 1
+    }
     let textField: UITextField = {
         let textField = UITextField()
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .roundedRect
         return textField
     }()
+
     let label: UILabel = {
         let label = UILabel()
         label.textColor = .red
@@ -24,11 +29,12 @@ final class LoginTextFieldView: UIView {
         label.isHidden = true
         return label
     }()
-    init(placeholderText: String, errorText: String, secureText: Bool) {
+
+    init(placeholderText: String, errorText: String, isTextSecure: Bool) {
         super.init(frame: .zero)
         label.text = errorText
         textField.placeholder = placeholderText
-        textField.isSecureTextEntry = secureText
+        textField.isSecureTextEntry = isTextSecure
         add(textField, label)
     }
 
@@ -42,14 +48,15 @@ final class LoginTextFieldView: UIView {
             maker.top()
                 .left()
                 .right()
-                .height(40)
+                .height(Constants.textFieldHeight)
         }
         label.configureFrame { maker in
-            maker.top(to: textField.nui_bottom, inset: 1)
-            .left()
-            .sizeToFit()
+            maker.top(to: textField.nui_bottom, inset: Constants.textFieldHeight)
+                .left()
+                .sizeToFit()
         }
-}
+    }
+
     func update(viewModel: LoginTextFieldViewModel) {
         label.text = viewModel.errorText
         label.isHidden = viewModel.isHidden

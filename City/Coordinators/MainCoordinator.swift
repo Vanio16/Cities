@@ -16,8 +16,8 @@ final class MainCoordinator: MainViewControllerOutput, DetailViewControllerOutpu
     let mainViewController = MainViewController()
     let detailViewController = DetailViewController()
     var tabBarItems = [TabBarItem(title: "Таблица", imageName: "rectangle.grid.1x2.fill"),
-    TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill"),
-    TabBarItem(title: "Вход", imageName: "person.fill")]
+                       TabBarItem(title: "Коллекция", imageName: "square.grid.2x2.fill"),
+                       TabBarItem(title: "Вход", imageName: "person.fill")]
     let newCollectionModule: NewCollectionModule = .init()
     let loginModule: LoginModule = .init()
 

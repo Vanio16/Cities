@@ -12,7 +12,6 @@ final class LoginTextFieldViewModel {
     var isHidden: Bool
     var color: UIColor
     var errorText: String
-
     init(isHidden: Bool, color: UIColor, errorText: String) {
         self.isHidden = isHidden
         self.color = color

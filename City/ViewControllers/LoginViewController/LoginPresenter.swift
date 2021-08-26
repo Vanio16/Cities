@@ -12,14 +12,19 @@ final class LoginPresenter {
 
     weak var view: LoginViewController?
     weak var output: LoginModuleOutput?
-
+    var state: LoginState
     init(state: LoginState) {
-
+        self.state = state
     }
 }
 
 extension LoginPresenter: LoginViewOutput {
-    func loadDataInPresenter(textFirstName: String, textLastName: String, textEmail: String, textPassword: String) {
+    func togglePasswordSecure() {
+        state.isHidePasswordButtonTap.toggle()
+        view?.passwordField.textField.isSecureTextEntry = state.isHidePasswordButtonTap
+        view?.hidePasswordButton.setImage(state.passwordButtonImage, for: .normal)
+    }
+    func sendData(textFirstName: String, textLastName: String, textEmail: String, textPassword: String) {
         if textFirstName.count == 0 {
             view?.firstNameLoginTextViewModel.isHidden = false
             view?.firstNameLoginTextViewModel.color = .systemPink
@@ -67,7 +72,6 @@ extension LoginPresenter: LoginViewOutput {
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-
 }
 
 extension LoginPresenter: LoginModuleInput {
