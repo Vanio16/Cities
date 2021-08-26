@@ -51,7 +51,7 @@ final class LoginTextFieldView: UIView {
                 .height(Constants.textFieldHeight)
         }
         label.configureFrame { maker in
-            maker.top(to: textField.nui_bottom, inset: Constants.textFieldHeight)
+            maker.top(to: textField.nui_bottom, inset: Constants.labelInsetTop)
                 .left()
                 .sizeToFit()
         }

@@ -24,50 +24,49 @@ extension LoginPresenter: LoginViewOutput {
         view?.passwordField.textField.isSecureTextEntry = state.isHidePasswordButtonTap
         view?.hidePasswordButton.setImage(state.passwordButtonImage, for: .normal)
     }
-    func sendData(textFirstName: String, textLastName: String, textEmail: String, textPassword: String) {
-        if textFirstName.count == 0 {
-            view?.firstNameLoginTextViewModel.isHidden = false
-            view?.firstNameLoginTextViewModel.color = .systemPink
-        }
-        else {
-            view?.firstNameLoginTextViewModel.color = .green
-            view?.firstNameLoginTextViewModel.isHidden = true
-        }
 
-        if textLastName.count == 0 {
-            view?.lastNameLoginTextViewModel.color = .systemPink
-            view?.lastNameLoginTextViewModel.isHidden = false
-        }
-        else {
-            view?.lastNameLoginTextViewModel.color = .green
-            view?.lastNameLoginTextViewModel.isHidden = true
-        }
-        if textEmail.count == 0 {
-            view?.emailLoginTextViewModel.color = .systemPink
-            view?.emailLoginTextViewModel.errorText = "Это поле не может быть пустым"
-            view?.emailLoginTextViewModel.isHidden = false
-        }
-        else if textEmail.count != 0 && !isValidEmail(textEmail) {
-            view?.emailLoginTextViewModel.color = .systemPink
-            view?.emailLoginTextViewModel.errorText = "Введите правильный e-mail"
-            view?.emailLoginTextViewModel.isHidden = false
-        }
-        else {
-            view?.emailLoginTextViewModel.color = .green
-            view?.emailLoginTextViewModel.isHidden = true
-        }
+    func sendData(firstName: LoginTextFieldViewModel,
+                  lastName: LoginTextFieldViewModel,
+                  email: LoginTextFieldViewModel,
+                  password: LoginTextFieldViewModel,
+                  username: LoginTextFieldViewModel,
+                  address: LoginTextFieldViewModel,
+                  phoneNumber: LoginTextFieldViewModel) {
+        checkFieldViewModel(firstName, minTextCount: 0)
+        checkFieldViewModel(lastName, minTextCount: 0)
+        checkFieldViewModel(password, minTextCount: 5)
+        checkFieldViewModel(username, minTextCount: 0)
+        checkFieldViewModel(address, minTextCount: 0)
+        checkFieldViewModel(phoneNumber, minTextCount: 0)
 
-        if textPassword.count < 6 {
-            view?.passwordLoginTextViewModel.color = .systemPink
-            view?.passwordLoginTextViewModel.isHidden = false
+        if email.text.count == 0 {
+            email.color = .systemPink
+            email.errorText = "Это поле не может быть пустым"
+            email.isHidden = false
+        }
+        else if email.text.count != 0 && !isValidEmail(email.text) {
+            email.color = .systemPink
+            email.errorText = "Введите правильный e-mail"
+            email.isHidden = false
         }
         else {
-            view?.passwordLoginTextViewModel.color = .green
-            view?.passwordLoginTextViewModel.isHidden = true
+            email.color = .green
+            email.isHidden = true
         }
         view?.update()
     }
-    func isValidEmail(_ email: String) -> Bool {
+    private func checkFieldViewModel(_ viewModel: LoginTextFieldViewModel, minTextCount: Int) {
+        if viewModel.text.count > minTextCount {
+            viewModel.color = .green
+            viewModel.isHidden = true
+        }
+        else {
+            viewModel.isHidden = false
+            viewModel.color = .systemPink
+        }
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
